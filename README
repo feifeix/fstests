@@ -270,3 +270,16 @@ Pass/failure:
     The recent pass/fail history is maintained in the file "check.log".
     The elapsed time for the most recent pass for each test is kept
     in "check.time".
+
+Raid56 Tests:
+    To test raid56, we need to setup "TEST_RAID_DEV" having at least
+    3 devices. An example of the local.config to test raid56 as below:
+
+    export TEST_DEV=/dev/loop0
+    export TEST_RAID_DEV="/dev/loop0 /dev/loop1 /dev/loop2"
+    export TEST_DIR=/mnt/btrfs-xfstests-loop0
+    MKFS_OPTIONS="-m raid5 -d raid5 -L raidtest"
+    export SCRATCH_DEV_POOL="/dev/loop3 /dev/loop4 /dev/loop5"
+    export SCRATCH_MNT=/mnt/btrfs-xfstests-scratch
+    MKFS_SCRATCH_OPTIONS="-m raid5 -d raid5 -L raidtest_scratch"
+    MOUNT_OPTIONS="-o nospace_cache "
